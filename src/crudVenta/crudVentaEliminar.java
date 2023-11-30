@@ -26,8 +26,6 @@ import Entidades.Pelicula;
 import Entidades.Sala;
 import Entidades.Ticket;
 import Entidades.funcion;
-import rojerusan.RSTableMetro;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -103,7 +101,7 @@ public class crudVentaEliminar {
 		scrollPane.setBounds(10, 10, 531, 203);
 		frmCrudVentaEliminar.getContentPane().add(scrollPane);
 		
-		tblVenta = new RSTableMetro();
+		tblVenta = new JTable();
 		tblVenta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -112,13 +110,7 @@ public class crudVentaEliminar {
 				
 			}
 		});
-		 ((RSTableMetro) tblVentas).setColorBackgoundHead(new Color(231,0,32));
-	        ((RSTableMetro) tblVentas).setAltoHead(20);
-	        ((RSTableMetro) tblVentas).setColorFilasForeground1(Color.BLACK);
-	        ((RSTableMetro) tblVentas).setColorFilasForeground2(Color.BLACK);
-	        ((RSTableMetro) tblVentas).setColorFilasBackgound2(Color.LIGHT_GRAY);
-	        ((RSTableMetro) tblVentas).setColorSelBackgound(new Color(231, 0, 32));
-	        tblVentas.setForeground(Color.WHITE);
+		
 		model.addColumn("ID DETALLEVENTA");
 		model.addColumn("CANTIDAD DE BOLETOS NORMAL");
 		model.addColumn("CANTIDAD DE BOLETOS VIP");
