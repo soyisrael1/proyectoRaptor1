@@ -36,6 +36,12 @@ import Datas.DataSala;
 import Datas.DataTicket;
 import Entidades.Sala;
 import Entidades.Ticket;
+import rojerusan.RSTableMetro;
+
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudVentaVer {
 
@@ -49,6 +55,7 @@ public class crudVentaVer {
 	int fila = 0;
 	int idSala = 0;
 	private JButton btnPDF;
+	private JLabel lblNewLabel;
 	
 	 public void actualizarTabla() {
 		 DataTicket dc=new DataTicket();
@@ -86,6 +93,7 @@ public class crudVentaVer {
 	 */
 	private void initialize() {
 		frmCrudVentasVer = new JFrame();
+		frmCrudVentasVer.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudVentasVer.setTitle("                                                   Ver Ventas");
 		frmCrudVentasVer.setBounds(100, 100, 589, 640);
 		frmCrudVentasVer.setLocationRelativeTo(null);
@@ -95,7 +103,7 @@ public class crudVentaVer {
 		scrollPane.setBounds(10, 10, 555, 462);
 		frmCrudVentasVer.getContentPane().add(scrollPane);
 		
-		tblSalas = new JTable();
+		tblSalas = new RSTableMetro();
 		tblSalas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -104,6 +112,13 @@ public class crudVentaVer {
 				
 			}
 		});
+		 ((RSTableMetro) tblSalas).setColorBackgoundHead(new Color(231,0,32));
+	        ((RSTableMetro) tblSalas).setAltoHead(20);
+	        ((RSTableMetro) tblSalas).setColorFilasForeground1(Color.BLACK);
+	        ((RSTableMetro) tblSalas).setColorFilasForeground2(Color.BLACK);
+	        ((RSTableMetro) tblSalas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+	        ((RSTableMetro) tblSalas).setColorSelBackgound(new Color(231, 0, 32));
+	        tblSalas.setForeground(Color.WHITE);
 		model.addColumn("ID TI");
 		  model.addColumn("ID SALA");
 		  model.addColumn("ID PELICULA");
@@ -113,7 +128,11 @@ public class crudVentaVer {
 		  model.addColumn("CANTIDAD ASIENTOS");
 		scrollPane.setViewportView(tblSalas);
 		
-		btnPDF = new JButton("PDF");
+		btnPDF = new JButton("");
+		btnPDF.setOpaque(false);
+		btnPDF.setBorder(null);
+		btnPDF.setBackground(Color.RED);
+		btnPDF.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\pdhgg-removebg-preview.png"));
 		btnPDF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				generarPDF();
@@ -121,6 +140,11 @@ public class crudVentaVer {
 		});
 		btnPDF.setBounds(10, 482, 555, 100);
 		frmCrudVentasVer.getContentPane().add(btnPDF);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ipxf.png"));
+		lblNewLabel.setBounds(0, 0, 575, 603);
+		frmCrudVentasVer.getContentPane().add(lblNewLabel);
 	}
 	public void limpiarFormulario() {
 		

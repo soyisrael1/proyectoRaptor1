@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import Datas.DataCombo;
 import Datas.DataFuncion;
 import Datas.DataPelicula;
@@ -19,6 +24,7 @@ import Entidades.Sala;
 import Entidades.Ticket;
 import Entidades.funcion;
 import data.Usuario;
+import rojerusan.RSTableMetro;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -32,18 +38,23 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudVenta {
 
 	public JFrame frmCrudVenta;
 	ArrayList<Ticket> listaTickets=null;
 	 
-	 ArrayList<Combo>listaCombo;
-	 ArrayList<funcion>listaFuncion;
+	 static ArrayList<Combo>listaCombo;
+	 static ArrayList<funcion>listaFuncion;
 	 DefaultTableModel model=new DefaultTableModel();
 	 DefaultComboBoxModel modelCombo=null;
 	 DefaultComboBoxModel modelCombo2=null;
@@ -58,7 +69,6 @@ public class crudVenta {
 	 int numAsientosV;
 	 int costoBN;
 	 int costoBV;
-	 private JLabel lblCosto;
 	 private JScrollPane scrollPane;
 	 private JLabel lblID;
 	 String tipo="";
@@ -66,7 +76,7 @@ public class crudVenta {
 	 private JSpinner spnAsientosV;
 	 private JLabel lblCombo;
 	 private JComboBox cmbCombo;
-	 
+	 int usuario;
 
 	/**
 	 * Launch the application.
@@ -75,10 +85,12 @@ public class crudVenta {
 
 	/**
 	 * Create the application.
+	 * @param usuario 
 	 */
 	  
-	public crudVenta() {
+	public crudVenta(int usuario) {
 		initialize();
+		this.usuario=usuario;
 		DataFuncion du=new DataFuncion();
 		  listaFuncion=du.SelectFuncion();
 		  Object nombresFunciones[]=new Object[listaFuncion.size()];
@@ -96,6 +108,11 @@ public class crudVenta {
 		 }
 		 modelCombo = new DefaultComboBoxModel(nombresCom);
 		 cmbCombo.setModel(modelCombo);
+		 
+		 JLabel lblNewLabel_4 = new JLabel("");
+		 lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\121212121.jpg"));
+		 lblNewLabel_4.setBounds(0, 0, 832, 608);
+		 frmCrudVenta.getContentPane().add(lblNewLabel_4);
 		 
 		 actualizarTabla();
 
@@ -121,7 +138,7 @@ public class crudVenta {
 		   
 		  }
 	 
-	 public String getFuncion(int idFun) {
+	 public static String getFuncion(int idFun) {
 		  String fun = "";
 		  for (funcion u: listaFuncion) {
 		   if(u.getIdfun()== idFun){
@@ -132,7 +149,7 @@ public class crudVenta {
 		  return fun;
 		  
 		 }	
-	 public String getCombo(int idCom) {
+	 public static String getCombo(int idCom) {
 		  String com = "";
 		  for (Combo u: listaCombo) {
 		   if(u.getIdcombo()== idCom){
@@ -170,7 +187,7 @@ public class crudVenta {
 		    o[3]=u.getCostoboletosv();
 		    o[4]=getCombo(u.getIdcombo());
 		    o[5]=u.getIduser();
-		    o[6]=u.getCosto();
+		    o[6]=getComboC(u.getIdcombo());
 		    o[7]=getFuncion(u.getIdfun());
 		    o[8]=u.getCostot();
 		    
@@ -178,6 +195,29 @@ public class crudVenta {
 		   }
 		   tblVentas.setModel(model);
 		 }
+	 public static void generateTicket(String tickets, Ticket p) {
+	        Document document = new Document();
+	        
+
+	        try {
+	            PdfWriter.getInstance(document, new FileOutputStream(tickets));
+	            document.open();
+
+	            // 
+	            document.add(new Paragraph("Funcion: " + getFuncion(p.getIdfun())));
+	            document.add(new Paragraph("Combo: " + getCombo(p.getIdcombo())));
+	            document.add(new Paragraph("Cantidad de Boletos Normales: " + p.getCantboletosn()+" = "+p.getCostoboletosn()));
+	            document.add(new Paragraph("Cantidad de Boletos VIP: " + p.getCantboletosv()+" = "+p.getCostoboletosv()));
+	            document.add(new Paragraph("Costo Total: $" + p.getCostot()));
+	            
+
+	        } catch (DocumentException | FileNotFoundException e) {
+	            e.printStackTrace(System.out);
+	        } finally {
+	            document.close();
+	        }
+
+	    }
 	
 
 	/**
@@ -185,11 +225,13 @@ public class crudVenta {
 	 */
 	private void initialize() {
 		frmCrudVenta = new JFrame();
+		frmCrudVenta.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudVenta.setBounds(100, 100, 846, 645);
 		
 		frmCrudVenta.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Funcion");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(10, 55, 108, 36);
@@ -200,12 +242,14 @@ public class crudVenta {
 		frmCrudVenta.getContentPane().add(cmbFuncion);
 		
 		JLabel lblNewLabel_1 = new JLabel("ID:");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(10, 10, 108, 35);
 		frmCrudVenta.getContentPane().add(lblNewLabel_1);
 		
 		lblID = new JLabel("0");
+		lblID.setForeground(new Color(255, 255, 255));
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblID.setHorizontalAlignment(SwingConstants.CENTER);
 		lblID.setBounds(128, 10, 108, 35);
@@ -216,7 +260,7 @@ public class crudVenta {
 		 scrollPane.setBounds(309, 10, 513, 588);
 		 frmCrudVenta.getContentPane().add(scrollPane);
 		 
-		 tblVentas = new JTable();
+		 tblVentas = new RSTableMetro();
 		 tblVentas.addMouseListener(new MouseAdapter() {
 		 	@Override
 		 	public void mouseClicked(MouseEvent e) {
@@ -227,11 +271,18 @@ public class crudVenta {
 		        cmbCombo.setSelectedIndex(seleccionarCombo(p));
 		        spnAsientosN.setValue(p.getCantboletosn());
 		        spnAsientosV.setValue(p.getCantboletosv());
-		        lblCosto.setText(""+p.getCostot()+"$");
+		        
 		        
 		        
 		 	}
 		 });
+		 ((RSTableMetro) tblVentas).setColorBackgoundHead(new Color(231,0,32));
+	        ((RSTableMetro) tblVentas).setAltoHead(20);
+	        ((RSTableMetro) tblVentas).setColorFilasForeground1(Color.BLACK);
+	        ((RSTableMetro) tblVentas).setColorFilasForeground2(Color.BLACK);
+	        ((RSTableMetro) tblVentas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+	        ((RSTableMetro) tblVentas).setColorSelBackgound(new Color(231, 0, 32));
+	        tblVentas.setForeground(Color.WHITE);
 
 		  model.addColumn("CANTIDAD DE BOLETOS NORMAL");
 		  model.addColumn("CANTIDAD DE BOLETOS VIP");
@@ -257,45 +308,57 @@ public class crudVenta {
 		 frmCrudVenta.getContentPane().add(spnAsientosN);
 		 
 		 JLabel lblNewLabel_3 = new JLabel("Asientos Normales");
+		 lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		 lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		 lblNewLabel_3.setBounds(10, 151, 152, 37);
 		 frmCrudVenta.getContentPane().add(lblNewLabel_3);
 		 
 		 JButton btnAgregar = new JButton("Agregar");
+		 btnAgregar.setBackground(Color.DARK_GRAY);
+		 btnAgregar.setBorder(null);
+		 btnAgregar.setOpaque(false);
+		 btnAgregar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\tiinsdt-removebg-preview.png"));
 		 btnAgregar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		 try {
 		 			
 		 			
 				     Ticket p= new Ticket();
-				     int costoCombo=getComboC(p.getIdcombo());
-				     int costoTota=costoBN+costoBV+costoCombo;
+				     int costoCombo=costoCombo = getComboC(listaCombo.get(cmbCombo.getSelectedIndex()).getIdcombo());
+				     int costoTota = costoBN + costoBV + costoCombo;
+
+		
 				     p.setCantboletosn(numAsientosN);
 				     p.setCantboletosv(numAsientosV);
 				     p.setCostoboletosn(costoBN);
 				     p.setCostoboletosv(costoBV);
 				     p.setIdcombo(listaCombo.get(cmbCombo.getSelectedIndex()).getIdcombo());
-				     p.setIduser(p.getIduser());
+				     p.setIduser(usuario);
 				     p.setCosto(costoCombo);
 				     p.setIdfun(listaFuncion.get(cmbFuncion.getSelectedIndex()).getIdfun());
 				     p.setCostot(costoTota);
 				     
-				     if(p.insertarTicket()) {
-				      JOptionPane.showConfirmDialog(null, "se inserto correctamente");
-				      actualizarTabla();
-				      
-				     }else {
-				      JOptionPane.showConfirmDialog(null, "ERROR");
-				     }
+				     if (p.insertarTicket()) {
+				    	    JOptionPane.showConfirmDialog(null, "se insertó correctamente");
+				    	    actualizarTabla();
+				    	    generateTicket("tickets.pdf", p);
+				    	} else {
+				    	    JOptionPane.showConfirmDialog(null, "ERROR");
+				    	}
+
 				    } catch (Exception e2) {
 				     JOptionPane.showConfirmDialog(null, "ERROR");
 				    }
 		 	}
 		 });
-		 btnAgregar.setBounds(98, 303, 122, 114);
+		 btnAgregar.setBounds(114, 291, 122, 114);
 		 frmCrudVenta.getContentPane().add(btnAgregar);
 		 
 		 JButton btnActualizar = new JButton("Actualizar");
+		 btnActualizar.setBorder(null);
+		 btnActualizar.setBackground(new Color(0, 0, 255));
+		 btnActualizar.setOpaque(false);
+		 btnActualizar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\upassaew-removebg-preview.png"));
 		 btnActualizar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		try {
@@ -308,7 +371,9 @@ public class crudVenta {
 				     p.setCostoboletosv(costoBV);
 				     p.setIdcombo(listaCombo.get(cmbCombo.getSelectedIndex()).getIdcombo());
 				     p.setIduser(1);
-				     p.setCosto(costoCombo);
+				     p.setCosto(getComboC(listaCombo.get(cmbCombo.getSelectedIndex()).getIdcombo()));
+				    
+
 				     p.setIdfun(listaFuncion.get(cmbFuncion.getSelectedIndex()).getIdfun());
 				     p.setCostot(costoTota);
 				     if(p.actualizarTicket()) {
@@ -324,16 +389,11 @@ public class crudVenta {
 		 		    
 		 	}
 		 });
-		 btnActualizar.setBounds(98, 427, 122, 114);
+		 btnActualizar.setBounds(66, 473, 196, 44);
 		 frmCrudVenta.getContentPane().add(btnActualizar);
 		 
-		 lblCosto = new JLabel("0$");
-		 lblCosto.setHorizontalAlignment(SwingConstants.CENTER);
-		 lblCosto.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		 lblCosto.setBounds(88, 253, 148, 40);
-		 frmCrudVenta.getContentPane().add(lblCosto);
-		 
 		 lblNewLabel_2 = new JLabel("Asietnos Vip");
+		 lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		 lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		 lblNewLabel_2.setBounds(10, 101, 152, 37);
 		 frmCrudVenta.getContentPane().add(lblNewLabel_2);
@@ -350,6 +410,7 @@ public class crudVenta {
 		 frmCrudVenta.getContentPane().add(spnAsientosV);
 		 
 		 lblCombo = new JLabel("Combo");
+		 lblCombo.setForeground(new Color(255, 255, 255));
 		 lblCombo.setHorizontalAlignment(SwingConstants.CENTER);
 		 lblCombo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		 lblCombo.setBounds(10, 196, 108, 36);

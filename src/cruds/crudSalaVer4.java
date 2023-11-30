@@ -39,6 +39,7 @@ import rojerusan.RSTableMetro;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 public class crudSalaVer4 {
 
@@ -88,6 +89,7 @@ public class crudSalaVer4 {
 	 */
 	private void initialize() {
 		frmCrudSalaVer = new JFrame();
+		frmCrudSalaVer.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudSalaVer.setTitle("                                                   Ver Salas");
 		frmCrudSalaVer.setBounds(100, 100, 589, 640);
 		frmCrudSalaVer.setLocationRelativeTo(null);
@@ -127,7 +129,7 @@ public class crudSalaVer4 {
 		btnPDF.setBorder(null);
 		btnPDF.setOpaque(false);
 		btnPDF.setBackground(Color.RED);
-		btnPDF.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\pdhgg-removebg-preview.png"));
+		btnPDF.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\pdhgg-removebg-preview.png"));
 		btnPDF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				generarPDF();
@@ -137,7 +139,7 @@ public class crudSalaVer4 {
 		frmCrudSalaVer.getContentPane().add(btnPDF);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\ipxf.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ipxf.png"));
 		lblNewLabel.setBounds(0, 0, 573, 601);
 		frmCrudSalaVer.getContentPane().add(lblNewLabel);
 	}

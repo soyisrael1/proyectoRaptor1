@@ -86,6 +86,7 @@ public boolean login(Usuario x){
 }
 
 
+
 public boolean eliminarUsuario(int id) {
 	PreparedStatement ps;
 	try {

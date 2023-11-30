@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudSala {
 
@@ -83,6 +84,7 @@ public class crudSala {
 	 */
 	private void initialize() {
 		frmCrudSala = new JFrame();
+		frmCrudSala.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudSala.setBackground(Color.RED);
 		frmCrudSala.setBounds(100, 100, 678, 500);
 		frmCrudSala.setLocationRelativeTo(null);
@@ -244,7 +246,7 @@ public class crudSala {
 			actualizarTabla();
 			}
 		});
-		btnAgregar.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\tiinsdtxxc-removebg-preview.png"));
+		btnAgregar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\tiinsdt-removebg-preview.png"));
 		btnAgregar.setHorizontalTextPosition(SwingConstants.CENTER);
         btnAgregar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnAgregar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -255,7 +257,7 @@ public class crudSala {
 		btnActualizar.setBorder(null);
 		btnActualizar.setOpaque(false);
 		btnActualizar.setBackground(Color.WHITE);
-		btnActualizar.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\upassaew-removebg-preview.png"));
+		btnActualizar.setIcon(new ImageIcon(crudSala.class.getResource("/IMG/upassaew-removebg-preview.png")));
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -281,7 +283,7 @@ public class crudSala {
 		frmCrudSala.getContentPane().add(btnActualizar);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\digidrty.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon(crudSala.class.getResource("/IMG/digidrty.jpg")));
 		lblNewLabel_2.setBounds(0, 0, 688, 495);
 		frmCrudSala.getContentPane().add(lblNewLabel_2);
 	}

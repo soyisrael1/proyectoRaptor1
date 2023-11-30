@@ -22,6 +22,7 @@ import Datas.DataSala;
 import Entidades.Combo;
 import Entidades.Sala;
 import rojerusan.RSTableMetro;
+import java.awt.Toolkit;
 
 public class crudComboEliminar {
 
@@ -74,6 +75,7 @@ public class crudComboEliminar {
 	 */
 	private void initialize() {
 		frmCrudComboEliminar = new JFrame();
+		frmCrudComboEliminar.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudComboEliminar.setTitle("EliminarCombo");
 		frmCrudComboEliminar.setBounds(100, 100, 842, 284);
 		frmCrudComboEliminar.setLocationRelativeTo(null);
@@ -113,7 +115,7 @@ public class crudComboEliminar {
 		btnEliminar.setBackground(Color.RED);
 		btnEliminar.setOpaque(false);
 		btnEliminar.setBorder(null);
-		btnEliminar.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\yig-removebg-preview.png"));
+		btnEliminar.setIcon(new ImageIcon(crudComboEliminar.class.getResource("/IMG/yig-removebg-preview.png")));
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -135,7 +137,7 @@ public class crudComboEliminar {
 		frmCrudComboEliminar.getContentPane().add(btnEliminar);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\jjoyu.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(crudComboEliminar.class.getResource("/IMG/jjoyu.jpg")));
 		lblNewLabel.setBounds(0, 0, 826, 245);
 		frmCrudComboEliminar.getContentPane().add(lblNewLabel);
 	}

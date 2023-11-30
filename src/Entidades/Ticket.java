@@ -129,8 +129,7 @@ public class Ticket {
 	public void setDh(DataTicket dh) {
 		this.dh = dh;
 	}
-	
-	
+		
 	
 	
 

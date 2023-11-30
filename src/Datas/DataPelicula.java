@@ -38,19 +38,16 @@ import Entidades.Pelicula;
 	    public boolean insertarPelicula(Pelicula a) {
 	        PreparedStatement ps;
 	        try {
-	        	FileInputStream archivoFoto;
+	        	
 	            ps = conectar().prepareStatement("INSERT INTO pelicula VALUES(null,?,?,?,?)");
 	            ps.setString(1, a.getNombre());
 	            ps.setString(2, a.getCategoria());
 	            ps.setString(3, a.getRangoEdad());
-	            
-	            archivoFoto=new FileInputStream(a.getRutaImagen());
-	            ps.setBinaryStream(4, archivoFoto);
-
+	            ps.setString(4, a.getRutaImagen());
 
 	            ps.execute();
 	            return true;
-	        } catch (SQLException | IOException e) {
+	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
@@ -66,18 +63,18 @@ import Entidades.Pelicula;
 	            ps.setString(1, a.getNombre());
 	            ps.setString(2, a.getCategoria());
 	            ps.setString(3, a.getRangoEdad());
-	            archivoFoto=new FileInputStream(a.getRutaImagen());
-	            ps.setBinaryStream(4, archivoFoto);
+	            ps.setString(4, a.getRutaImagen());
 
 
 	            ps.setInt(5, a.getIdPeli());
 	            ps.execute();
 	            return true;
-	        } catch (SQLException | IOException e) {
+	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
 	    }
+	    
 
 
 

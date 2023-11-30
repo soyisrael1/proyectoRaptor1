@@ -26,6 +26,7 @@ import Entidades.Sala;
 import Entidades.Ticket;
 import Entidades.funcion;
 import rojerusan.RSTableMetro;
+import java.awt.Toolkit;
 
 public class crudFuncionEliminar {
 
@@ -78,6 +79,7 @@ public class crudFuncionEliminar {
 	 */
 	private void initialize() {
 		frmCrudFuncionEliminar = new JFrame();
+		frmCrudFuncionEliminar.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudFuncionEliminar.setTitle("EliminarFuncion");
 		frmCrudFuncionEliminar.setBounds(100, 100, 842, 284);
 		frmCrudFuncionEliminar.setLocationRelativeTo(null);
@@ -115,6 +117,10 @@ public class crudFuncionEliminar {
 	        scrollPane.setViewportView(tblFunciones);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setOpaque(false);
+		btnEliminar.setBorder(null);
+		btnEliminar.setBackground(Color.ORANGE);
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\yig-removebg-preview.png"));
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int op = JOptionPane.showConfirmDialog(null, "estas seguro de eliminar?", "Eliminar",
@@ -134,7 +140,7 @@ public class crudFuncionEliminar {
 		btnEliminar.setBounds(551, 10, 267, 203);
 		frmCrudFuncionEliminar.getContentPane().add(btnEliminar);
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\jjoyu.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\jjoyu.jpg"));
 		lblNewLabel.setBounds(0, 0, 826, 245);
 		frmCrudFuncionEliminar.getContentPane().add(lblNewLabel);
 	}

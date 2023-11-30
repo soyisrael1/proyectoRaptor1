@@ -9,6 +9,7 @@ import javax.swing.table.TableCellRenderer;
 
 import Datas.DataPelicula;
 import Entidades.Pelicula;
+import rojerusan.RSTableMetro;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class crudPelicula {
 
@@ -41,9 +49,31 @@ public class crudPelicula {
     private JLabel lblId;
     private JButton btnImagen;
     private JLabel lblImagen;
+    ImageIcon imgOri = null;
+    String imagenActual="";
+    
 
     public void actualizarTabla() {
         DataPelicula da = new DataPelicula();
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            @Override //Redefinimos el mÃ©todo getColumnClass
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                        return Object.class;
+                    case 1:
+                        return Object.class;
+                    case 2:
+                        return Object.class;
+                    case 3:
+                        return Object.class;
+                    case 4:
+                        return ImageIcon.class;
+                    default:
+                        return Object.class;
+                }
+            }
+        };
 
         while (model.getRowCount() > 0) {
             model.removeRow(0);
@@ -56,12 +86,69 @@ public class crudPelicula {
             o[1] = sala.getNombre();
             o[2] = sala.getCategoria();
             o[3] = sala.getRangoEdad();
-            o[4] = new ImageIcon(sala.getRutaImagen());
+            if(!sala.getRutaImagen().equals("")) {
+            	o[2] = base64ToImage(sala.getRutaImagen());
+            }else {
+            	o[2]=null;
+            }
 
             model.addRow(o);
         }
         tblPeliculas.setModel(model);
     }
+   
+        
+        
+       
+   
+    public ImageIcon base64ToImage(String base64) {
+        ImageIcon image = null;
+        try {
+            byte[] imageByte;
+            imageByte = Base64.getDecoder().decode(base64);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            BufferedImage bufferedImage = ImageIO.read(bis);
+            image = new ImageIcon(bufferedImage);
+            bis.close();
+        } catch (IOException ex) {
+            Logger.getLogger(crudPelicula.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return image;
+    }
+
+    public String convetirImagen(URL url) {
+        String base64 = "";
+        try {
+            BufferedImage bImage = ImageIO.read(new File(url.getPath()));
+            BufferedImage img = resize(bImage, 100, 100);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(img, "jpg", bos);
+            byte[] data = bos.toByteArray();
+            base64 = Base64.getEncoder().encodeToString(data);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(crudPelicula.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        } catch (IOException ex) {
+            Logger.getLogger(crudPelicula.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return base64;
+    }
+
+    public BufferedImage resize(BufferedImage bufferedImage, int newW, int newH) {
+        int w = bufferedImage.getWidth();
+        int h = bufferedImage.getHeight();
+        BufferedImage bufim = new BufferedImage(newW, newH, bufferedImage.getType());
+        Graphics2D g = bufim.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(bufferedImage, 0, 0, newW, newH, 0, 0, w, h, null);
+        g.dispose();
+        return bufim;
+    }
+
+    
+    
 
     /**
      * Create the application.
@@ -73,6 +160,7 @@ public class crudPelicula {
 
     private void initialize() {
         frmCrudPelicula = new JFrame();
+        frmCrudPelicula.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
         frmCrudPelicula.setBounds(100, 100, 928, 743);
         frmCrudPelicula.getContentPane().setLayout(null);
 
@@ -80,7 +168,13 @@ public class crudPelicula {
         scrollPane.setBounds(363, 10, 526, 541);
         frmCrudPelicula.getContentPane().add(scrollPane);
 
-        tblPeliculas = new JTable();
+        tblPeliculas  = new RSTableMetro();
+        ((RSTableMetro) tblPeliculas).setColorBackgoundHead(new Color(231,0,32));
+        ((RSTableMetro) tblPeliculas).setAltoHead(20);
+        ((RSTableMetro) tblPeliculas).setColorFilasForeground1(Color.BLACK);
+        ((RSTableMetro) tblPeliculas).setColorFilasForeground2(Color.BLACK);
+        ((RSTableMetro) tblPeliculas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+        ((RSTableMetro) tblPeliculas).setColorSelBackgound(new Color(231, 0, 32));
         tblPeliculas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -93,23 +187,7 @@ public class crudPelicula {
                 
             }
         });
-        tblPeliculas.setDefaultRenderer(Object.class, new TableCellRenderer() {
-            private final DefaultTableCellRenderer defaultRenderer = new DefaultTableCellRenderer();
-
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component renderer = defaultRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                if (column == 5 && value instanceof ImageIcon) {
-                    JLabel label = new JLabel((ImageIcon) value);
-                    label.setOpaque(true);
-                    label.setBackground(table.getBackground());
-                    return label;
-                }
-
-                return renderer;
-            }
-        });
+        
 
 
         model.addColumn("ID PELI");
@@ -125,13 +203,17 @@ public class crudPelicula {
         frmCrudPelicula.getContentPane().add(lblImagen);
 
         JButton btnAgregar = new JButton("Agregar");
+        btnAgregar.setBackground(Color.RED);
+        btnAgregar.setOpaque(false);
+        btnAgregar.setBorder(null);
+        btnAgregar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\tiinsdt-removebg-preview.png"));
         btnAgregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Pelicula peli = new Pelicula();
                 peli.setNombre(txtNombre.getText());
                 peli.setCategoria(txtCategoria.getText());
                 peli.setRangoEdad(txtRangoEdad.getText());
-                peli.setRutaImagen(rutaImagen);
+                peli.setRutaImagen(imagenActual);
 
              
                 listaPeliculas.add(peli);
@@ -150,6 +232,10 @@ public class crudPelicula {
         frmCrudPelicula.getContentPane().add(btnAgregar);
 
         JButton btnActualizar = new JButton("Actualizar");
+        btnActualizar.setBackground(Color.RED);
+        btnActualizar.setBorder(null);
+        btnActualizar.setOpaque(false);
+        btnActualizar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\upassaew-removebg-preview.png"));
         btnActualizar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -169,21 +255,24 @@ public class crudPelicula {
                 }
             }
         });
-        btnActualizar.setBounds(115, 411, 167, 140);
+        btnActualizar.setBounds(101, 411, 186, 140);
         frmCrudPelicula.getContentPane().add(btnActualizar);
 
         JLabel lblNewLabel = new JLabel("ID:");
+        lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblNewLabel.setBounds(10, 12, 65, 43);
+        lblNewLabel.setBounds(68, 10, 84, 43);
         frmCrudPelicula.getContentPane().add(lblNewLabel);
 
         lblId = new JLabel("0");
+        lblId.setForeground(new Color(255, 255, 255));
         lblId.setHorizontalAlignment(SwingConstants.CENTER);
         lblId.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblId.setBounds(190, 11, 92, 45);
         frmCrudPelicula.getContentPane().add(lblId);
 
         JLabel lblNewLabel_2 = new JLabel("Nombre");
+        lblNewLabel_2.setForeground(new Color(255, 255, 255));
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2.setBounds(10, 70, 167, 43);
@@ -200,6 +289,7 @@ public class crudPelicula {
         frmCrudPelicula.getContentPane().add(txtCategoria);
 
         JLabel lblNewLabel_2_1 = new JLabel("Categoria");
+        lblNewLabel_2_1.setForeground(new Color(255, 255, 255));
         lblNewLabel_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2_1.setBounds(10, 123, 167, 43);
@@ -211,12 +301,17 @@ public class crudPelicula {
         frmCrudPelicula.getContentPane().add(txtRangoEdad);
 
         JLabel lblNewLabel_2_2 = new JLabel("RangoEdad");
+        lblNewLabel_2_2.setForeground(new Color(255, 255, 255));
         lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblNewLabel_2_2.setBounds(10, 176, 167, 43);
         frmCrudPelicula.getContentPane().add(lblNewLabel_2_2);
 
         btnImagen = new JButton("Seleccionar imagen");
+        btnImagen.setBackground(Color.RED);
+        btnImagen.setOpaque(false);
+        btnImagen.setBorder(null);
+        btnImagen.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\asxx.png"));
         btnImagen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 SeleccionarImagen();
@@ -224,6 +319,12 @@ public class crudPelicula {
         });
         btnImagen.setBounds(115, 561, 167, 140);
         frmCrudPelicula.getContentPane().add(btnImagen);
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setForeground(new Color(255, 255, 255));
+        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\qw.png"));
+        lblNewLabel_1.setBounds(0, 0, 904, 706);
+        frmCrudPelicula.getContentPane().add(lblNewLabel_1);
     }
 
     public void limpiarFormulario() {
@@ -234,59 +335,28 @@ public class crudPelicula {
     }
 
     public void SeleccionarImagen() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Seleccionar Imagen");
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Imagen", "jpg", "jpeg", "png", "gif");
-        fileChooser.setFileFilter(filter);
-
-        int result = fileChooser.showOpenDialog(frmCrudPelicula);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            rutaImagen = selectedFile.getAbsolutePath();
-            System.out.println("Imagen seleccionada: " + rutaImagen);
-            Image mImagen=new ImageIcon(rutaImagen).getImage();
-            ImageIcon mIcon =new ImageIcon(mImagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH));
-            lblImagen.setIcon(mIcon);
-            	
-
-        }
-        }
-    public class ImageToBytesAndText {
-
-        public static void main(String[] args) {
+    	JFileChooser selector = new JFileChooser();
+        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        selector.setFileFilter(filtroImagen);
+        int r = selector.showOpenDialog(null);
+        if (r == JFileChooser.APPROVE_OPTION) {
             try {
-                // Ruta de la imagen
-                String imagePath = rutaImagen;
-
-                // Convertir imagen a bytes
-                byte[] imageBytes = convertImageToBytes(imagePath);
-
-                // Convertir bytes a texto
-                String textRepresentation = convertBytesToText(imageBytes);
-
-                // Imprimir el resultado
-                System.out.println("Texto generado a partir de la imagen:\n" + textRepresentation);
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                File f = selector.getSelectedFile();
+                ImageIcon img = new ImageIcon(selector.getSelectedFile().toURL());
+                imgOri = img;
+                Image image = img.getImage(); // transform it
+                Image newimg = image.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
+                URL urlImage = selector.getSelectedFile().toURL();
+                imagenActual = convetirImagen(urlImage);
+                System.out.println(imagenActual);
+                lblImagen.setIcon(new ImageIcon(newimg));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(crudPelicula.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
-        // Método para convertir una imagen a bytes
-        private static byte[] convertImageToBytes(String imagePath) throws IOException {
-            BufferedImage image = ImageIO.read(new File(imagePath));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", baos);
-            return baos.toByteArray();
+        
         }
-
-        // Método para convertir bytes a texto
-        private static String convertBytesToText(byte[] bytes) {
-            return new String(bytes);
-        }
-    }
+}
     
-    }
-            
+        

@@ -36,6 +36,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class crudFuncion {
 
@@ -118,7 +119,11 @@ public class crudFuncion {
 		 txtFecha.setBounds(105, 163, 96, 41);
 		 frmCrudFuncion.getContentPane().add(txtFecha);
 		 
-		 JButton btnAñadir = new JButton("New button");
+		 JButton btnAñadir = new JButton("");
+		 btnAñadir.setOpaque(false);
+		 btnAñadir.setBorder(null);
+		 btnAñadir.setBackground(Color.ORANGE);
+		 btnAñadir.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\tiinsdt-removebg-preview.png"));
 		 btnAñadir.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		try {
@@ -146,7 +151,11 @@ public class crudFuncion {
 		 btnAñadir.setBounds(40, 214, 160, 113);
 		 frmCrudFuncion.getContentPane().add(btnAñadir);
 		 
-		 JButton btnActualizar = new JButton("New button");
+		 JButton btnActualizar = new JButton("");
+		 btnActualizar.setOpaque(false);
+		 btnActualizar.setBorder(null);
+		 btnActualizar.setBackground(Color.RED);
+		 btnActualizar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\upassaew-removebg-preview.png"));
 		 btnActualizar.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		try {
@@ -205,9 +214,9 @@ public class crudFuncion {
 			  
 	        scrollPane.setViewportView(tblFunciones);
 	        
-	        lblNewLabel_1 = new JLabel("");
+	        lblNewLabel_1 = new JLabel();
 	        lblNewLabel_1.setBounds(0, 0, 688, 495);
-	        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\digidrty.jpg"));
+	        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\digidrty.jpg"));
 	        frmCrudFuncion.getContentPane().add(lblNewLabel_1);
 		 
 		 
@@ -268,6 +277,7 @@ public class crudFuncion {
 	 */
 	private void initialize() {
 		frmCrudFuncion = new JFrame();
+		frmCrudFuncion.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudFuncion.setBackground(Color.RED);
 		frmCrudFuncion.setBounds(100, 100, 678, 500);
 		frmCrudFuncion.setLocationRelativeTo(null);

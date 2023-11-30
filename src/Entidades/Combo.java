@@ -89,6 +89,14 @@ public class Combo {
 	public void setCantRefresco(int cantRefresco) {
 		this.cantRefresco = cantRefresco;
 	}
+	public boolean validaProveedor() {
+        if (!this.tamaño.equals("") && !this.nombre.equals("") ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 	
 	
 

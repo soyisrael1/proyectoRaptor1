@@ -45,14 +45,20 @@ import javax.swing.JMenuItem;
 import javax.swing.JDesktopPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class cine<crudFuncionElimianr> {
 
 	JFrame frmLobby;
 	private JMenuItem mntmNewMenuItem_2;
 	private JLabel lblNewLabel_3;
-	private JLabel lblUsuario;
+	private JLabel lblUEFEW;
 	DataUsuario da=new DataUsuario();
+	private JMenuItem mntmNewMenuItem_15;
+	private JLabel lblUsuairo;
+	int usuario;
+	Usuario o=new Usuario();
+	 ArrayList<Usuario> listaUsuario=new ArrayList<Usuario>();
 
 	/**
 	 * Launch the application.
@@ -61,12 +67,24 @@ public class cine<crudFuncionElimianr> {
 
 	/**
 	 * Create the application.
+	 * @param usuario 
 	 */
-	public cine() {
+	public cine(int usuario) {
 		initialize();
-		
+		this.usuario=usuario;
+		lblUsuairo.setText("USUARIO:"+usuario);
 		
 	}
+	public String getNombre(int idUser) {
+		  String nombre = null;
+		  for (Usuario u: listaUsuario) {
+		   if(u.getIdUser()== usuario){
+		    nombre = u.getNombre();
+		    
+		   }
+		  }
+		  return nombre;
+		 }
 
 	/**
 	 * Initialize the contents of the frame.
@@ -141,6 +159,8 @@ public class cine<crudFuncionElimianr> {
 		menuBar_1.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("VER");
+		mntmNewMenuItem.setForeground(Color.WHITE);
+		mntmNewMenuItem.setBackground(Color.RED);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudVentaVer venta = new crudVentaVer();
@@ -150,16 +170,20 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("AÑADIR");
+		mntmNewMenuItem_1.setForeground(Color.WHITE);
+		mntmNewMenuItem_1.setBackground(Color.RED);
 		mntmNewMenuItem_1.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\agg.gif"));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				crudVenta venta = new crudVenta();
+				crudVenta venta = new crudVenta(usuario);
 				venta.frmCrudVenta.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 		
 		mntmNewMenuItem_2 = new JMenuItem("ELIMINAR");
+		mntmNewMenuItem_2.setForeground(Color.WHITE);
+		mntmNewMenuItem_2.setBackground(Color.RED);
 		mntmNewMenuItem_2.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\del.gif"));
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,7 +237,9 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_2.setForeground(new Color(255, 255, 255));
 		menuBar_1.add(mnNewMenu_2);
 		
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("AgregarCombo");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("AGREGAR COMBO");
+		mntmNewMenuItem_3.setForeground(Color.WHITE);
+		mntmNewMenuItem_3.setBackground(Color.RED);
 		mntmNewMenuItem_3.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\agg.gif"));
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -223,7 +249,9 @@ public class cine<crudFuncionElimianr> {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Ver Combos");
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("VER COMBO");
+		mntmNewMenuItem_10.setForeground(Color.WHITE);
+		mntmNewMenuItem_10.setBackground(Color.RED);
 		mntmNewMenuItem_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudComboVer sala = new crudComboVer();
@@ -233,7 +261,9 @@ public class cine<crudFuncionElimianr> {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_10);
 		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Eliminar Combo");
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("ELIMINAR COMBO");
+		mntmNewMenuItem_11.setForeground(Color.WHITE);
+		mntmNewMenuItem_11.setBackground(Color.RED);
 		mntmNewMenuItem_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudComboEliminar sala = new crudComboEliminar();
@@ -246,7 +276,9 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_4.setForeground(new Color(255, 255, 255));
 		menuBar_1.add(mnNewMenu_4);
 		
-		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Añadir/Actualizar");
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("AÑADIR/ACTUALIZAR");
+		mntmNewMenuItem_12.setForeground(Color.WHITE);
+		mntmNewMenuItem_12.setBackground(Color.RED);
 		mntmNewMenuItem_12.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\agg.gif"));
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -256,7 +288,9 @@ public class cine<crudFuncionElimianr> {
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_12);
 		
-		JMenuItem mntmNewMenuItem_13 = new JMenuItem("EliminarFuncion");
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("ELIMINAR FUNCION");
+		mntmNewMenuItem_13.setForeground(Color.WHITE);
+		mntmNewMenuItem_13.setBackground(Color.RED);
 		mntmNewMenuItem_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudFuncionEliminar sala1 = new crudFuncionEliminar();
@@ -265,7 +299,9 @@ public class cine<crudFuncionElimianr> {
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_13);
 		
-		JMenuItem mntmNewMenuItem_14 = new JMenuItem("VerFuncion");
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("VER FUNCION");
+		mntmNewMenuItem_14.setForeground(Color.WHITE);
+		mntmNewMenuItem_14.setBackground(Color.RED);
 		mntmNewMenuItem_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VerFunciones sala =new VerFunciones();
@@ -274,10 +310,13 @@ public class cine<crudFuncionElimianr> {
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_14);
 		
-		JMenu mnNewMenu_5 = new JMenu("Usuarios");
+		JMenu mnNewMenu_5 = new JMenu("USUARIOS");
+		mnNewMenu_5.setForeground(Color.WHITE);
 		menuBar_1.add(mnNewMenu_5);
 		
-		JMenuItem mntmNewMenuItem_15 = new JMenuItem("USUARIOS");
+		mntmNewMenuItem_15 = new JMenuItem("USUARIOS");
+		mntmNewMenuItem_15.setForeground(Color.WHITE);
+		mntmNewMenuItem_15.setBackground(Color.RED);
 		mntmNewMenuItem_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudUsuario sala =new crudUsuario();
@@ -292,18 +331,18 @@ public class cine<crudFuncionElimianr> {
 		lblNewLabel_5_1.setForeground(Color.WHITE);
 		lblNewLabel_5_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
-		lblUsuario = new JLabel(" No solo vendemos boleto vendemos una experiencia inolvidable");
-		lblUsuario.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuario.setBounds(-57, 0, 1481, 44);
-		panel_1.add(lblUsuario);
-		lblUsuario.setForeground(Color.WHITE);
+		lblUEFEW = new JLabel(" No solo vendemos boleto vendemos una experiencia inolvidable");
+		lblUEFEW.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblUEFEW.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUEFEW.setBounds(-57, 0, 1481, 44);
+		panel_1.add(lblUEFEW);
+		lblUEFEW.setForeground(Color.WHITE);
 		
-		JLabel lblNewLabel_4 = new JLabel("USUARIO:");
-		lblNewLabel_4.setBounds(1212, 8, 212, 33);
-		panel_1.add(lblNewLabel_4);
-		lblNewLabel_4.setFont(new Font("Segoe UI", Font.BOLD, 17));
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
+		lblUsuairo = new JLabel("USUARIO:");
+		lblUsuairo.setBounds(1212, 8, 212, 33);
+		panel_1.add(lblUsuairo);
+		lblUsuairo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+		lblUsuairo.setForeground(new Color(255, 255, 255));
 		
 		lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\salir (2).png"));
@@ -327,18 +366,18 @@ public class cine<crudFuncionElimianr> {
 		lblNewLabel_2.setFont(new Font("Segoe UI", Font.PLAIN, 22));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(41, 247, 161, 88);
+		lblNewLabel_2.setBounds(522, 642, 161, 43);
 		frmLobby.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("FINALIZAR PROGRAMA");
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_1.setForeground(Color.WHITE);
 		lblNewLabel_2_1.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-		lblNewLabel_2_1.setBounds(10, 446, 232, 43);
+		lblNewLabel_2_1.setBounds(830, 642, 232, 43);
 		frmLobby.getContentPane().add(lblNewLabel_2_1);
 		
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3.setBounds(66, 111, 113, 126);
+		lblNewLabel_3.setBounds(538, 506, 113, 126);
 		frmLobby.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
@@ -350,7 +389,7 @@ public class cine<crudFuncionElimianr> {
 		});
 		lblNewLabel_3_1.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\cerrar pestaña.png"));
 		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3_1.setBounds(68, 327, 123, 112);
+		lblNewLabel_3_1.setBounds(874, 520, 123, 112);
 		frmLobby.getContentPane().add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_6 = new JLabel("");

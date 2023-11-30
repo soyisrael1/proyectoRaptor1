@@ -36,6 +36,12 @@ import Datas.DataPelicula;
 import Datas.DataSala;
 import Entidades.Pelicula;
 import Entidades.Sala;
+import rojerusan.RSTableMetro;
+
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudPeliculaVer {
 	public JFrame frmCrudPeliculaVer;
@@ -48,6 +54,7 @@ public class crudPeliculaVer {
 	int fila = 0;
 	int idPeli = 0;
 	private JButton btnPDF;
+	private JLabel lblNewLabel;
 	
 	public void actualizarTabla() {
 		DataPelicula da = new DataPelicula();
@@ -84,6 +91,7 @@ public class crudPeliculaVer {
 	 */
 	private void initialize() {
 		frmCrudPeliculaVer = new JFrame();
+		frmCrudPeliculaVer.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudPeliculaVer.setTitle("                                                   Ver Peliculas");
 		frmCrudPeliculaVer.setBounds(100, 100, 589, 640);
 		frmCrudPeliculaVer.setLocationRelativeTo(null);
@@ -93,7 +101,7 @@ public class crudPeliculaVer {
 		scrollPane.setBounds(10, 10, 555, 462);
 		frmCrudPeliculaVer.getContentPane().add(scrollPane);
 		
-		tblSalas = new JTable();
+		tblSalas = new RSTableMetro();
 		tblSalas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -102,6 +110,13 @@ public class crudPeliculaVer {
 				
 			}
 		});
+		((RSTableMetro) tblSalas).setColorBackgoundHead(new Color(231,0,32));
+        ((RSTableMetro) tblSalas).setAltoHead(20);
+        ((RSTableMetro) tblSalas).setColorFilasForeground1(Color.BLACK);
+        ((RSTableMetro) tblSalas).setColorFilasForeground2(Color.BLACK);
+        ((RSTableMetro) tblSalas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+        ((RSTableMetro) tblSalas).setColorSelBackgound(new Color(231, 0, 32));
+        tblSalas.setForeground(Color.WHITE);
 		model.addColumn("ID PELI");
 		  model.addColumn("NOMBRE");
 		  model.addColumn("CATEGORIA");
@@ -109,7 +124,11 @@ public class crudPeliculaVer {
 		  
 		scrollPane.setViewportView(tblSalas);
 		
-		btnPDF = new JButton("PDF");
+		btnPDF = new JButton("");
+		btnPDF.setBackground(Color.RED);
+		btnPDF.setOpaque(false);
+		btnPDF.setBorder(null);
+		btnPDF.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\pdhgg-removebg-preview.png"));
 		btnPDF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				generarPDF();
@@ -117,6 +136,11 @@ public class crudPeliculaVer {
 		});
 		btnPDF.setBounds(10, 482, 555, 100);
 		frmCrudPeliculaVer.getContentPane().add(btnPDF);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ipxf.png"));
+		lblNewLabel.setBounds(0, 0, 575, 603);
+		frmCrudPeliculaVer.getContentPane().add(lblNewLabel);
 	}
 	public void limpiarFormulario() {
 		

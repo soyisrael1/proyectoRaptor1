@@ -20,6 +20,7 @@ public class DataCombo {
    
 
     public DataCombo() {
+    	
     }
 
     public Connection conectar() {
@@ -32,6 +33,45 @@ public class DataCombo {
         }
         return cx;
     }
+    
+    public ArrayList<Combo> buscar(String palabra) {
+        ArrayList<Combo> lista2 = new ArrayList<Combo>();
+        try {
+            String sql = "SELECT * FROM combos WHERE "
+                    + "(tamaño LIKE ?) OR "
+                    + "(nombre LIKE ?) OR"
+                    + "(cantPalomitas LIKE ?) OR "
+                    + "(costo LIKE ?) OR "
+                    + "(cantRefresco LIKE ?); ";
+            PreparedStatement ps =  conectar().prepareStatement(sql);
+            ps.setString(1, "%" + palabra + "%");
+            ps.setString(2, "%" + palabra + "%");
+            ps.setString(3, "%" + palabra + "%");
+            ps.setString(4, "%" + palabra + "%");
+            ps.setString(5, "%" + palabra + "%");
+            //System.out.println("CONSULTA" + ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Combo p = new Combo();
+                p.setIdcombo(rs.getInt("idcombo"));
+                p.setTamaño(rs.getString("tamaño"));
+                p.setNombre(rs.getString("nombre"));
+                p.setCantPalomitas(rs.getInt("cantPalomitas"));
+                p.setCosto(rs.getInt("costo"));
+                p.setCantRefresco(rs.getInt("cantRefresco"));
+                lista2.add(p);
+            }
+            ps.close();
+            ps = null;
+            
+        } catch (SQLException ex) {
+            System.out.println("Error en BUSCAR");
+        }
+        return lista2;
+
+    }
+
+    
     public boolean insertarCombo(Combo a) {
         PreparedStatement ps;
         try {

@@ -26,6 +26,12 @@ import Entidades.Pelicula;
 import Entidades.Sala;
 import Entidades.Ticket;
 import Entidades.funcion;
+import rojerusan.RSTableMetro;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudVentaEliminar {
 
@@ -48,6 +54,7 @@ public class crudVentaEliminar {
 	 int costoBN;
 	 int costoBV;
 	 private JButton btnEliminar;
+	 private JLabel lblNewLabel;
 
 	 public void actualizarTabla() {
 		  while (model.getRowCount()>0) { 
@@ -86,6 +93,7 @@ public class crudVentaEliminar {
 	
 	 	private void initialize() {
 		frmCrudVentaEliminar = new JFrame();
+		frmCrudVentaEliminar.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudVentaEliminar.setTitle("EliminarVenta");
 		frmCrudVentaEliminar.setBounds(100, 100, 842, 284);
 		frmCrudVentaEliminar.setLocationRelativeTo(null);
@@ -95,7 +103,7 @@ public class crudVentaEliminar {
 		scrollPane.setBounds(10, 10, 531, 203);
 		frmCrudVentaEliminar.getContentPane().add(scrollPane);
 		
-		tblVenta = new JTable();
+		tblVenta = new RSTableMetro();
 		tblVenta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -104,6 +112,13 @@ public class crudVentaEliminar {
 				
 			}
 		});
+		 ((RSTableMetro) tblVentas).setColorBackgoundHead(new Color(231,0,32));
+	        ((RSTableMetro) tblVentas).setAltoHead(20);
+	        ((RSTableMetro) tblVentas).setColorFilasForeground1(Color.BLACK);
+	        ((RSTableMetro) tblVentas).setColorFilasForeground2(Color.BLACK);
+	        ((RSTableMetro) tblVentas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+	        ((RSTableMetro) tblVentas).setColorSelBackgound(new Color(231, 0, 32));
+	        tblVentas.setForeground(Color.WHITE);
 		model.addColumn("ID DETALLEVENTA");
 		model.addColumn("CANTIDAD DE BOLETOS NORMAL");
 		model.addColumn("CANTIDAD DE BOLETOS VIP");
@@ -117,6 +132,10 @@ public class crudVentaEliminar {
 		scrollPane.setViewportView(tblVenta);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBackground(Color.ORANGE);
+		btnEliminar.setBorder(null);
+		btnEliminar.setOpaque(false);
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\yig-removebg-preview.png"));
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -136,6 +155,11 @@ public class crudVentaEliminar {
 		});
 		btnEliminar.setBounds(551, 10, 267, 203);
 		frmCrudVentaEliminar.getContentPane().add(btnEliminar);
+		
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\jjoyu.jpg"));
+		lblNewLabel.setBounds(0, 0, 828, 247);
+		frmCrudVentaEliminar.getContentPane().add(lblNewLabel);
 	}
 	public void limpiarFormulario() {
 		

@@ -29,35 +29,15 @@ public class barraprogreso {
 	private JProgressBar barraProgreso;
 
 	String Correo = "";
+	int usuario;
 
-	public static void main(String[] args) {
 
-		EventQueue.invokeLater(new Runnable() {
 
-			public void run() {
-
-				try {
-
-					barraprogreso window = new barraprogreso();
-
-					window.frmBarraDeProgreso.setVisible(true);
-
-				} catch (Exception e) {
-
-					e.printStackTrace();
-
-				}
-
-			}
-
-		});
-
-	}
-
-	public barraprogreso() {
+	public barraprogreso(int usuario) {
 
 		initialize();
 		start();
+		this.usuario=usuario;
 
 	}
 
@@ -85,7 +65,7 @@ public class barraprogreso {
 
 					if (i == 100) {
 
-						cine cine = new cine();
+						cine cine = new cine(usuario);
 						cine.frmLobby.setVisible(true);
 
 						frmBarraDeProgreso.setVisible(false);
@@ -137,7 +117,7 @@ public class barraprogreso {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setBackground(Color.RED);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\cargando.gif"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\cargando.gif"));
 		lblNewLabel.setBounds(0, 9, 200, 176);
 		frmBarraDeProgreso.getContentPane().add(lblNewLabel);
 		

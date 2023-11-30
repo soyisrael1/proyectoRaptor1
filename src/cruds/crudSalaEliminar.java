@@ -24,6 +24,7 @@ import Entidades.Sala;
 import rojerusan.RSTableMetro;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudSalaEliminar {
 
@@ -74,6 +75,7 @@ public class crudSalaEliminar {
 	 */
 	private void initialize() {
 		frmCrudSalaEliminar = new JFrame();
+		frmCrudSalaEliminar.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudSalaEliminar.setTitle("EliminarSala");
 		frmCrudSalaEliminar.setBounds(100, 100, 842, 284);
 		frmCrudSalaEliminar.setLocationRelativeTo(null);
@@ -134,7 +136,7 @@ public class crudSalaEliminar {
 		frmCrudSalaEliminar.getContentPane().add(btnEliminar);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\jjoyu.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\jjoyu.jpg"));
 		lblNewLabel.setBounds(0, 0, 826, 245);
 		frmCrudSalaEliminar.getContentPane().add(lblNewLabel);
 	}

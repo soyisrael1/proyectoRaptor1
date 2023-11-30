@@ -18,6 +18,12 @@ import Datas.DataPelicula;
 import Datas.DataSala;
 import Entidades.Pelicula;
 import Entidades.Sala;
+import rojerusan.RSTableMetro;
+
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class crudPeliculaEliminar {
 
@@ -31,6 +37,7 @@ public class crudPeliculaEliminar {
 	int fila = 0;
 	int idPeli = 0;
 	private JButton btnEliminar;
+	private JLabel lblNewLabel;
 	
 	public void actualizarTabla() {
 		DataPelicula da = new DataPelicula();
@@ -67,6 +74,7 @@ public class crudPeliculaEliminar {
 	 */
 	private void initialize() {
 		frmCrudPeliculaEliminar = new JFrame();
+		frmCrudPeliculaEliminar.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudPeliculaEliminar.setTitle("EliminarPelicula");
 		frmCrudPeliculaEliminar.setBounds(100, 100, 842, 284);
 		frmCrudPeliculaEliminar.setLocationRelativeTo(null);
@@ -76,7 +84,7 @@ public class crudPeliculaEliminar {
 		scrollPane.setBounds(10, 10, 531, 203);
 		frmCrudPeliculaEliminar.getContentPane().add(scrollPane);
 		
-		tblSalas = new JTable();
+		tblSalas = new RSTableMetro();
 		tblSalas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -85,6 +93,13 @@ public class crudPeliculaEliminar {
 				
 			}
 		});
+		((RSTableMetro) tblSalas).setColorBackgoundHead(new Color(231,0,32));
+        ((RSTableMetro) tblSalas).setAltoHead(20);
+        ((RSTableMetro) tblSalas).setColorFilasForeground1(Color.BLACK);
+        ((RSTableMetro) tblSalas).setColorFilasForeground2(Color.BLACK);
+        ((RSTableMetro) tblSalas).setColorFilasBackgound2(Color.LIGHT_GRAY);
+        ((RSTableMetro) tblSalas).setColorSelBackgound(new Color(0, 0, 0));
+
 		model.addColumn("ID PELI");
 		  model.addColumn("NOMBRE");
 		  model.addColumn("CATEGORIA");
@@ -93,6 +108,10 @@ public class crudPeliculaEliminar {
 		scrollPane.setViewportView(tblSalas);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBackground(Color.RED);
+		btnEliminar.setBorder(null);
+		btnEliminar.setOpaque(false);
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\yig-removebg-preview.png"));
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -112,6 +131,11 @@ public class crudPeliculaEliminar {
 		});
 		btnEliminar.setBounds(551, 10, 267, 203);
 		frmCrudPeliculaEliminar.getContentPane().add(btnEliminar);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\jjoyu.jpg"));
+		lblNewLabel.setBounds(0, 0, 828, 247);
+		frmCrudPeliculaEliminar.getContentPane().add(lblNewLabel);
 	}
 	public void limpiarFormulario() {
 		

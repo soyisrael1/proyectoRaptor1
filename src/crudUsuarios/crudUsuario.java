@@ -78,40 +78,46 @@ public class crudUsuario {
 
 	private void initialize() {
 		frmCrudUsuario = new JFrame();
-		frmCrudUsuario.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\Downloads\\goku.jpg"));
+		frmCrudUsuario.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudUsuario.setTitle("CRUD USUARIO");
 		frmCrudUsuario.setBounds(100, 100, 783, 569);
-		frmCrudUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		frmCrudUsuario.setLocationRelativeTo(null);
 		frmCrudUsuario.getContentPane().setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("IdUser");
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setBounds(23, 10, 90, 29);
 		frmCrudUsuario.getContentPane().add(lblNewLabel);
 
 		txtidUser = new JLabel("");
+		txtidUser.setForeground(Color.WHITE);
 		txtidUser.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		txtidUser.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtidUser.setBounds(141, 10, 90, 29);
 		frmCrudUsuario.getContentPane().add(txtidUser);
 
 		JLabel lblCorreo = new JLabel("Correo");
+		lblCorreo.setForeground(Color.WHITE);
 		lblCorreo.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblCorreo.setBounds(23, 59, 84, 29);
 		frmCrudUsuario.getContentPane().add(lblCorreo);
 
 		JLabel lblTelefono = new JLabel("Telefono");
+		lblTelefono.setForeground(Color.WHITE);
 		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTelefono.setBounds(23, 100, 90, 29);
 		frmCrudUsuario.getContentPane().add(lblTelefono);
 
 		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblPassword.setBounds(23, 139, 103, 29);
 		frmCrudUsuario.getContentPane().add(lblPassword);
 
 		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNombre.setBounds(23, 178, 84, 29);
 		frmCrudUsuario.getContentPane().add(lblNombre);
@@ -169,7 +175,8 @@ public class crudUsuario {
 		frmCrudUsuario.getContentPane().add(txtNombre);
 
 		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.setIcon(new ImageIcon(crudUsuario.class.getResource("/redsocial/descargar (1).png")));
+		btnAgregar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\dd.jpeg"));
+		
 		btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAgregar.setForeground(new Color(0, 0, 0));
 		btnAgregar.addActionListener(new ActionListener() {
@@ -194,11 +201,12 @@ public class crudUsuario {
 
 			}
 		});
-		btnAgregar.setBounds(367, 19, 126, 38);
+		btnAgregar.setBounds(377, 56, 147, 38);
 		frmCrudUsuario.getContentPane().add(btnAgregar);
 
 		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.setIcon(new ImageIcon(crudUsuario.class.getResource("/redsocial/descargar2.png")));
+		btnActualizar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ac.jpeg"));
+		
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -220,11 +228,12 @@ public class crudUsuario {
 			}
 		});
 		btnActualizar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnActualizar.setBounds(565, 19, 147, 38);
+		btnActualizar.setBounds(565, 56, 147, 38);
 		frmCrudUsuario.getContentPane().add(btnActualizar);
 
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setIcon(new ImageIcon(crudUsuario.class.getResource("/redsocial/desargar3.png")));
+		btnEliminar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\si3.png"));
+		
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -247,11 +256,12 @@ public class crudUsuario {
 			}
 		});
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEliminar.setBounds(565, 139, 147, 38);
+		btnEliminar.setBounds(565, 136, 147, 38);
 		frmCrudUsuario.getContentPane().add(btnEliminar);
 
 		JButton btnBorrar = new JButton("Borrar");
-		btnBorrar.setIcon(new ImageIcon(crudUsuario.class.getResource("/redsocial/borrar (1).png")));
+		btnBorrar.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
+		
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			txtidUser.setText(" ");
@@ -293,6 +303,11 @@ public class crudUsuario {
 		tblUsuarios.setModel(model);
 
 		scrollPane.setViewportView(tblUsuarios);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\rojo4 (1).png"));
+		lblNewLabel_1.setBounds(0, 0, 769, 532);
+		frmCrudUsuario.getContentPane().add(lblNewLabel_1);
 	}
 
 	public void limpiarFormulario() {

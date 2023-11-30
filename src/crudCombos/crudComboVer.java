@@ -40,6 +40,11 @@ import Datas.DataSala;
 import Entidades.Combo;
 import Entidades.Sala;
 import rojerusan.RSTableMetro;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 public class crudComboVer {
 
@@ -53,6 +58,7 @@ public class crudComboVer {
 	int fila = 0;
 	int idSala = 0;
 	private JButton btnPDF;
+	private JTextField txtBuscar;
 	
 	public void actualizarTabla() {
 		DataCombo da = new DataCombo();
@@ -78,6 +84,33 @@ public class crudComboVer {
 		}
 		tblSalas.setModel(model);
 	}
+	
+	 
+	
+	 public void refrescarTabla2(String palabra) {
+		 DataCombo da=new DataCombo();
+		 
+	        while (model.getRowCount() > 0) {
+	            model.removeRow(0);
+	        }
+	        lista = da.buscar(palabra);
+	        
+			for (Combo sala : lista) {
+				Object o[] = new Object[5];
+				
+				o[0] = sala.getTamaño();
+				o[1] = sala.getNombre();
+				o[2] = sala.getCantPalomitas();
+				o[3] = sala.getCantRefresco();
+				o[4] = sala.getCosto();
+				
+			
+				
+				model.addRow(o);
+
+			}
+			tblSalas.setModel(model);
+		}
 	/**
 	 * Create the application.
 	 */
@@ -85,19 +118,21 @@ public class crudComboVer {
 		initialize();
 		actualizarTabla();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmCrudComboVer = new JFrame();
+		frmCrudComboVer.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudComboVer.setTitle("                                                   Ver Combo");
 		frmCrudComboVer.setBounds(100, 100, 589, 640);
 		frmCrudComboVer.setLocationRelativeTo(null);
 		frmCrudComboVer.getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 555, 462);
+		scrollPane.setBounds(10, 45, 555, 462);
 		frmCrudComboVer.getContentPane().add(scrollPane);
 		
 		tblSalas = new RSTableMetro();
@@ -131,17 +166,34 @@ public class crudComboVer {
 		btnPDF.setBorder(null);
 		btnPDF.setOpaque(false);
 		btnPDF.setBackground(Color.RED);
-		btnPDF.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\pdhgg-removebg-preview.png"));
+		btnPDF.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\pdhgg-removebg-preview.png"));
 		btnPDF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				generarPDF();
 			}
 		});
-		btnPDF.setBounds(172, 482, 186, 100);
+		
+		JLabel lblNewLabel_1 = new JLabel("Buscar");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 18));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(94, 13, 98, 22);
+		frmCrudComboVer.getContentPane().add(lblNewLabel_1);
+		
+		txtBuscar = new JTextField();
+		 txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+	            public void keyReleased(java.awt.event.KeyEvent evt) {
+	                txtBuscarKeyReleased(evt);
+	            }
+	        });
+		txtBuscar.setColumns(10);
+		txtBuscar.setBounds(205, 16, 186, 19);
+		frmCrudComboVer.getContentPane().add(txtBuscar);
+		btnPDF.setBounds(205, 501, 186, 100);
 		frmCrudComboVer.getContentPane().add(btnPDF);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\ipxf.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ipxf.png"));
 		lblNewLabel.setBounds(0, 0, 573, 601);
 		frmCrudComboVer.getContentPane().add(lblNewLabel);
 	}
@@ -226,5 +278,9 @@ public class crudComboVer {
                JOptionPane.showMessageDialog(frmCrudComboVer, "" + ex.getMessage());
                //Logger.getLogger(todosPDF.class.getName()).log(Level.SEVERE, null, ex);
            }
+        
    }
+	 private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+	        refrescarTabla2(txtBuscar.getText().toString());
+	    }//GEN-LAST:event_txtBuscarKeyReleased
 }

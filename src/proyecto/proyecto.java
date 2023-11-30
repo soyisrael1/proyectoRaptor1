@@ -32,7 +32,7 @@ public class proyecto {
     private JTextField txtCorreo;
     private JTextField txtPassword;
     public Usuario x = new Usuario();
-    public String user;
+    public int usuario;
     
 
     public static void main(String[] args) {
@@ -128,11 +128,13 @@ public class proyecto {
     			try {
     			    
     			    x.setCorreo(txtCorreo.getText());
-    			    x.setPassword(txtPassword.getText());
-    			    obtenerUsuario();
+    			    x.setPassword(encriptarPassword(txtPassword.getText()));
+    			    
+    			  
     			    if (x.login()) {
+    			    	usuario=x.getIdUser();
     			        JOptionPane.showMessageDialog(null, "BIENVENIDO "+txtCorreo.getText());
-    			        barraprogreso b = new barraprogreso();
+    			        barraprogreso b = new barraprogreso(usuario);
     			        frame.setVisible(false);
     			        b.frmBarraDeProgreso.setVisible(true);
     			    } else {
@@ -188,12 +190,12 @@ public class proyecto {
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\PROYECTVIC\\el buenop.gif"));
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\el buenop.gif"));
 		lblNewLabel_4.setBounds(-15, 21, 326, 181);
 		panel.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\PROYECTVIC\\ozi.gif"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ozi.gif"));
 		lblNewLabel.setBounds(381, 37, 372, 409);
 		frame.getContentPane().add(lblNewLabel);
 
@@ -236,7 +238,7 @@ public class proyecto {
         return new String(encoded);
     }
     public void obtenerUsuario() {
-    	user=x.getNombre();
+    	
     }
     
 }

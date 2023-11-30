@@ -28,6 +28,7 @@ import rojerusan.RSTableMetro;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.Toolkit;
 
 public class crudCombo {
 	public JFrame frmCrudCombo;
@@ -90,6 +91,7 @@ public class crudCombo {
 	 */
 	private void initialize() {
 		frmCrudCombo = new JFrame();
+		frmCrudCombo.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\8.png"));
 		frmCrudCombo.setBackground(Color.RED);
 		frmCrudCombo.setBounds(100, 100, 678, 500);
 		frmCrudCombo.setLocationRelativeTo(null);
@@ -265,7 +267,7 @@ public class crudCombo {
 			actualizarTabla();
 			}
 		});
-		btnAgregar.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\tiinsdtxxc-removebg-preview.png"));
+		btnAgregar.setIcon(new ImageIcon(crudCombo.class.getResource("/IMG/tiinsdt-removebg-preview.png")));
 		btnAgregar.setHorizontalTextPosition(SwingConstants.CENTER);
         btnAgregar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnAgregar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -276,7 +278,7 @@ public class crudCombo {
 		btnActualizar.setBorder(null);
 		btnActualizar.setOpaque(false);
 		btnActualizar.setBackground(Color.WHITE);
-		btnActualizar.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\upassaew-removebg-preview.png"));
+		btnActualizar.setIcon(new ImageIcon(crudCombo.class.getResource("/IMG/upassaew-removebg-preview.png")));
 		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -302,7 +304,7 @@ public class crudCombo {
 		frmCrudCombo.getContentPane().add(btnActualizar);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\travi\\Downloads\\PROYECTVIC\\digidrty.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon(crudCombo.class.getResource("/IMG/digidrty.jpg")));
 		lblNewLabel_2.setBounds(0, 0, 688, 495);
 		frmCrudCombo.getContentPane().add(lblNewLabel_2);
 	}
