@@ -119,7 +119,7 @@ public class cine<crudFuncionElimianr> {
 		menuBar_1.add(mnNewMenu_1);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("VER");
-		mntmNewMenuItem_4.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\ver agg.gif"));
+		mntmNewMenuItem_4.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ver1.png"));
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudPeliculaVer pelicula = new crudPeliculaVer();
@@ -143,7 +143,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_1.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("ELIMINAR");
-		mntmNewMenuItem_7.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\del.gif"));
+		mntmNewMenuItem_7.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudPeliculaEliminar pelicula = new crudPeliculaEliminar();
@@ -159,6 +159,7 @@ public class cine<crudFuncionElimianr> {
 		menuBar_1.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("VER");
+		mntmNewMenuItem.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ver1.png"));
 		mntmNewMenuItem.setForeground(Color.WHITE);
 		mntmNewMenuItem.setBackground(Color.RED);
 		mntmNewMenuItem.addActionListener(new ActionListener() {
@@ -184,7 +185,7 @@ public class cine<crudFuncionElimianr> {
 		mntmNewMenuItem_2 = new JMenuItem("ELIMINAR");
 		mntmNewMenuItem_2.setForeground(Color.WHITE);
 		mntmNewMenuItem_2.setBackground(Color.RED);
-		mntmNewMenuItem_2.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\del.gif"));
+		mntmNewMenuItem_2.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			crudVentaEliminar venta = new crudVentaEliminar();
@@ -211,7 +212,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_3.add(mntmNewMenuItem_5);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("ELIMINAR SALA");
-		mntmNewMenuItem_8.setIcon(new ImageIcon("C:\\Users\\Amgel\\Downloads\\imagenes java\\del.gif"));
+		mntmNewMenuItem_8.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
 		mntmNewMenuItem_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudSalaEliminar sala = new crudSalaEliminar();
@@ -223,6 +224,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_3.add(mntmNewMenuItem_8);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("VER SALA");
+		mntmNewMenuItem_9.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ver1.png"));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crudSalaVer4 sala = new crudSalaVer4();
@@ -250,6 +252,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_2.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("VER COMBO");
+		mntmNewMenuItem_10.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ver1.png"));
 		mntmNewMenuItem_10.setForeground(Color.WHITE);
 		mntmNewMenuItem_10.setBackground(Color.RED);
 		mntmNewMenuItem_10.addActionListener(new ActionListener() {
@@ -262,6 +265,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_2.add(mntmNewMenuItem_10);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("ELIMINAR COMBO");
+		mntmNewMenuItem_11.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
 		mntmNewMenuItem_11.setForeground(Color.WHITE);
 		mntmNewMenuItem_11.setBackground(Color.RED);
 		mntmNewMenuItem_11.addActionListener(new ActionListener() {
@@ -289,6 +293,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_4.add(mntmNewMenuItem_12);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("ELIMINAR FUNCION");
+		mntmNewMenuItem_13.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ba.jpeg"));
 		mntmNewMenuItem_13.setForeground(Color.WHITE);
 		mntmNewMenuItem_13.setBackground(Color.RED);
 		mntmNewMenuItem_13.addActionListener(new ActionListener() {
@@ -300,6 +305,7 @@ public class cine<crudFuncionElimianr> {
 		mnNewMenu_4.add(mntmNewMenuItem_13);
 		
 		JMenuItem mntmNewMenuItem_14 = new JMenuItem("VER FUNCION");
+		mntmNewMenuItem_14.setIcon(new ImageIcon("C:\\Users\\Amgel\\eclipse-workspace\\jajjajajja\\project3\\src\\IMG\\ver1.png"));
 		mntmNewMenuItem_14.setForeground(Color.WHITE);
 		mntmNewMenuItem_14.setBackground(Color.RED);
 		mntmNewMenuItem_14.addActionListener(new ActionListener() {
